@@ -15,7 +15,7 @@ def get_list():
 def ajouterEL():
         listbox1.insert(END, enter1.get())
         
- #supprission de l'element   
+#supprission de l'element   
 def supprimerEL():
                 index = listbox1.curselection()[0]
                 listbox1.delete(index)   
