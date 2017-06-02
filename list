@@ -1,32 +1,39 @@
 from tkinter import*
+import tkinter as tk
 import dbm, sys
 
 root = Tk()
-db = dbm.open("cache", "c")
-dbm.writelines(Liste)
 
-#définition
+#selection
 def get_list():
-        index = listbox1.curselection()[0]
-        seltxt = listbox1.get(index)
-        enter1.delete(0, 50)
-        enter1.insert(0, seltext)      
+        iElement = listbox1.curselection()
+        seltxt = listbox1.get(iElement)
+        
+        
 #Ajout des elements
 def ajouterEL():
         listbox1.insert(END, enter1.get())
         
-#supprission de l'element   
+#suppression de l'element   
 def supprimerEL():
-                index = listbox1.curselection()[0]
-                listbox1.delete(index)   
+        try:
+                iElement = listbox1.curselection()[0]
+                listbox1.delete(iElement)   
+        except IndexError:
+                pass
                 
 #Définition de la taille de la fenetre
 listbox1 =Listbox(root, width=25, height=10)
 listbox1.grid(row=0, column=0)
 
-myscroll = Scrollbar(command=listbox1.yview, orient=VERTICAL)
-myscroll.grid(row=0, column=1, sticky=N+S)
-listbox1.configure(myscrollcommand=myscroll.set)
+#Creer la barre
+scrollbar = Scrollbar(command=listbox1.yview, orient=VERTICAL)
+
+#Positionner le scrollbar
+scrollbar.grid(row=0, column=1, sticky=N+S)
+
+#Associer avec la listbox
+listbox1.configure(yscrollcommand=scrollbar.set)
 
 enter1 = Entry(root, width=25)
 enter1.insert(0, '')
